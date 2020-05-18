@@ -1,27 +1,32 @@
-let workTime = 1500; //sets default work clock time
-let breakTime = 0; //sets default break time
+let workTime = 15; //sets default work clock time
+let breakTime = 5; //sets default break time
 let currentTime = workTime
 let timerActive = false; 
+let timerMode = "work"
 let intervalId;
 
 //query selectors
 const clockDisplay = document.querySelector("#display");
 const toggleButton = document.querySelector("#timerToggleBtn");
+const displayModeDiv = document.querySelector("#displayMode")
 
 
 
 //this function updates the timer to change your session/break time
 function updateTime() {
-    let seconds = (currentTime%60).toFixed(0) || "00";
-    let minutes = ((cururrentTime/60) % 60).toFixed(0); 
-    seconds = (seconds<10) ? "0" + seconds : seconds;
-    (minutes >= 1) ? (minutes -= 1) : minutes;
-    let displayTime = `${minutes}:${seconds}`;
-    clockDisplay.textContent = displayTime;  
     currentTime--;
-    //checkTime();
+    clockDisplay.textContent = convertToDisplayTime(currentTime);    
+    
+    checkTime();
 } 
 
+function convertToDisplayTime(time){
+    let seconds = (currentTime%60).toFixed(0) || "00";
+    let minutes = ((currentTime/60) % 60).toFixed(0); 
+    seconds = (seconds<10) ? "0" + seconds : seconds;
+    (minutes >= 1) ? (minutes -= 1) : minutes;
+    return `${minutes}:${seconds}`;
+}
 //this function toggles the timer to start/pause
 function toggleTimer(){
     if(timerActive){
@@ -48,12 +53,19 @@ function stopTimer(){
 }
 
 function checkTime(){
-    if (breakTime === 0)
-        (startTimer )
+    if (currentTime <= 0 && timerMode === "work"){ //switch to break time
+        currentTime = breakTime;
+        timerMode = "break";
+        displayModeDiv.textContent = "break"
+        clockDisplay.textContent = convertToDisplayTime(breakTime);
+        toggleTimer();
     }
-    else{
-        breakTime = 300
-        currentTime = workTime
+    else if (currentTime <= 0 && timerMode === "break"){ //switch to work time
+        currentTime = workTime;
+        timerMode = "work";
+        displayModeDiv.textContent = "work"
+        clockDisplay.textContent = convertToDisplayTime(workTime);
+        toggleTimer();
     }
 }
 

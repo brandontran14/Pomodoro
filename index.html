@@ -10,18 +10,19 @@
 <!--Code goes here-->
     <h1>Pomodoro</h1>
     <div id="container">
-        <div id="clock">
+        <div id="displayContainer">
             <div id="display">25:00</div>
+            <div id="displayMode">work</div>
             <button id="timerToggleBtn">Start</button>
-
         </div>
-        <div id="timer">
-            <input id="clocktime" disabled>
-            <button class="clocktime">uptick</button>
-            <button class="clocktime">downtick</button>
-            <input id="breaktime" class="breaktime" disabled>
-            <button class="breaktime">uptick</button>
-            <button class="breaktime">downtick</button>
+        <div id="timeValueContainer" class="timeValue">
+            <div id="workTimeDisplay">25:00</div>
+                <button id="workUptick" class="workTime">+</button>
+                <button id="workDowntick" class="workTime">-</button>
+                
+            <div id="breakTimeDisplay">5:00</div>
+                <button id="breakUptick" class="breakTime">+</button>
+                <button id="breakDowntick" class="breakTime">-</button>
         </div>
     </div>
 </body>
