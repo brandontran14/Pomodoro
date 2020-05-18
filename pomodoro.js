@@ -1,6 +1,6 @@
-let workTime = 15; //sets default work clock time
-let breakTime = 5; //sets default break time
-let currentTime = workTime
+let workTime = 1500; //sets default work clock time
+let breakTime = 300; //sets default break time
+let currentTime = workTime;
 let timerActive = false; 
 let timerMode = "work"
 let intervalId;
@@ -9,6 +9,10 @@ let intervalId;
 const clockDisplay = document.querySelector("#display");
 const toggleButton = document.querySelector("#timerToggleBtn");
 const displayModeDiv = document.querySelector("#displayMode")
+const timeValueContainer = document.querySelector("#timeValueContainer")
+const workTimeDisplay = document.querySelector("#workTimeDisplay")
+const breakTimeDisplay = document.querySelector("#breakTimeDisplay")
+
 
 
 
@@ -69,5 +73,30 @@ function checkTime(){
     }
 }
 
+function changeTimeValue(event){
+    console.log("hi")
+   // if (event.target.className !== "increment") return; //ends the function if the selected element isn't a button
+
+    if(event.target.value === "workIncrease"){
+        workTime++;
+        console.log(workTime);
+        workTimeDisplay.textContent = convertToDisplayTime(workTime);
+    } 
+    else if(event.target.value == "workIncrease"){
+        workTime--;
+        workTimeDisplay.value = convertToDisplayTime(workTime);
+    }
+    else if(event.target.value == "workIncrease"){
+        breakTime++;
+        breakTimeDisplay.textContent = convertToDisplayTime(breakTime);
+    }
+    else if (event.target.value == "workIncrease"){
+        breakTime--;
+        breakTimeDisplay.textContent = convertToDisplayTime(breakTime);
+    }
+}
+
 //event listeners
 toggleButton.addEventListener("click",toggleTimer);
+timeValueContainer.addEventListener("click", changeTimeValue);
+
