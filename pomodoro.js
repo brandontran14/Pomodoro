@@ -12,7 +12,7 @@ const displayModeDiv = document.querySelector("#displayMode")
 const timeValueContainer = document.querySelector("#timeValueContainer")
 const workTimeDisplay = document.querySelector("#workTimeDisplay")
 const breakTimeDisplay = document.querySelector("#breakTimeDisplay")
-
+const pageTitle = document.querySelector("title")
 
 
 
@@ -20,7 +20,7 @@ const breakTimeDisplay = document.querySelector("#breakTimeDisplay")
 function updateTime() {
     currentTime--;
     clockDisplay.textContent = convertToDisplayTime(currentTime);    
-    
+    pageTitle.textContent = `Pomodoro Timer ${convertToDisplayTime(currentTime)} ${timerMode.toUpperCase()}`;
     checkTime();
 } 
 

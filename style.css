@@ -1,0 +1,25 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+#display{
+font-size: 200px;
+}
+#timerToggleBtn{
+    width: 10%;
+    height: 50px;
+}
+
+#timeValueContainer{
+    display:flex;
+    justify-content: center;
+    height: 50px;
+}
+.increments{
+    border: 1px solid black;
+    width: 5%;
+}
+.incrementContainer{
+    border: 1px solid black;
+    width: 10%
+}
