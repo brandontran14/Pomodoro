@@ -5,12 +5,12 @@ body{
 #display{
 font-size: 200px;
 }
-#timerToggleBtn{
+#startstopbtn{
     width: 10%;
     height: 50px;
 }
 
-#timeValueContainer{
+#WorkandBreakContainer{
     display:flex;
     justify-content: center;
     height: 50px;

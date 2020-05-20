@@ -7,12 +7,13 @@ let intervalId;
 
 //query selectors
 const clockDisplay = document.querySelector("#display");
-const toggleButton = document.querySelector("#timerToggleBtn");
-const displayModeDiv = document.querySelector("#displayMode")
-const timeValueContainer = document.querySelector("#timeValueContainer")
-const workTimeDisplay = document.querySelector("#workTimeDisplay")
-const breakTimeDisplay = document.querySelector("#breakTimeDisplay")
-const pageTitle = document.querySelector("title")
+const startstopbtn = document.querySelector("#startstopbtn");
+const displayModeDiv = document.querySelector("#displayMode");
+const WorkandBreakContainer = document.querySelector("#WorkandBreakContainer");
+const workTimeDisplay = document.querySelector("#workTimeDisplay");
+const breakTimeDisplay = document.querySelector("#breakTimeDisplay");
+const pageTitle = document.querySelector("title");
+const resetbtn = document.querySelector("#reset");
 
 
 
@@ -24,11 +25,11 @@ function updateTime() {
     checkTime();
 } 
 
+//converts display time into nice numbers
 function convertToDisplayTime(time){
-    let seconds = (currentTime%60).toFixed(0) || "00";
-    let minutes = ((currentTime/60) % 60).toFixed(0); 
-    seconds = (seconds<10) ? "0" + seconds : seconds;
-    (minutes >= 1) ? (minutes -= 1) : minutes;
+    let minutes = Math.floor(time / 60); 
+    let seconds = (time - minutes * 60);
+    seconds = (seconds<10) ? "0" + seconds : seconds; //formatting seconds
     return `${minutes}:${seconds}`;
 }
 //this function toggles the timer to start/pause
@@ -36,13 +37,13 @@ function toggleTimer(){
     if(timerActive){
         stopTimer();
         timerActive = false;
-        toggleButton.textContent = "Start";
+        startstopbtn.textContent = "Start";
 }
     //timeractive == false 
     else{
         startTimer();
         timerActive = true;
-        toggleButton.textContent = "Pause";
+        startstopbtn.textContent = "Pause";
     }
 }
 
@@ -56,6 +57,8 @@ function stopTimer(){
     clearInterval(intervalId);
 }
 
+
+//this function switches work/break once time runs out
 function checkTime(){
     if (currentTime <= 0 && timerMode === "work"){ //switch to break time
         currentTime = breakTime;
@@ -73,30 +76,41 @@ function checkTime(){
     }
 }
 
+//this function changes how much worktime/breaktime there is
 function changeTimeValue(event){
-    console.log("hi")
-   // if (event.target.className !== "increment") return; //ends the function if the selected element isn't a button
-
     if(event.target.value === "workIncrease"){
-        workTime++;
-        console.log(workTime);
+        workTime += 60; //workTime units is seconds
         workTimeDisplay.textContent = convertToDisplayTime(workTime);
     } 
-    else if(event.target.value == "workIncrease"){
-        workTime--;
-        workTimeDisplay.value = convertToDisplayTime(workTime);
+    else if(event.target.value == "workDecrease"){
+        workTime = (workTime <= 0) ? 0 : workTime -= 60; //doesnt allow negatives in the display
+        workTimeDisplay.textContent = convertToDisplayTime(workTime);
     }
-    else if(event.target.value == "workIncrease"){
-        breakTime++;
+    else if(event.target.value == "breakIncrease"){
+        breakTime += 60;
         breakTimeDisplay.textContent = convertToDisplayTime(breakTime);
     }
-    else if (event.target.value == "workIncrease"){
-        breakTime--;
+    else if (event.target.value == "breakDecrease"){
+        breakTime = (breakTime <= 0) ? 0 : breakTime -= 60;
         breakTimeDisplay.textContent = convertToDisplayTime(breakTime);
     }
 }
 
+//this function resets everything (defaults to work mode)
+function reset(){
+    stopTimer();
+    currentTime = workTime;
+    timerActive = false;
+    timerMode = "work"
+    workTimeDisplay.textContent = convertToDisplayTime(currentTime);
+    displayModeDiv.textContent = "work"
+    startstopbtn.textContent = "Start"
+    clockDisplay.textContent = convertToDisplayTime(currentTime);    
+    pageTitle.textContent = `Pomodoro Timer ${convertToDisplayTime(currentTime)} ${timerMode.toUpperCase()}`;
+}
+
 //event listeners
-toggleButton.addEventListener("click",toggleTimer);
-timeValueContainer.addEventListener("click", changeTimeValue);
+startstopbtn.addEventListener("click",toggleTimer);
+WorkandBreakContainer.addEventListener("click", changeTimeValue);
+resetbtn.addEventListener("click", reset);
 
