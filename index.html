@@ -14,16 +14,20 @@
         <div id="displayContainer">
             <div id="display">25:00</div>
             <div id="displayMode">work</div>
-            <button id="startstopbtn">Start</button>
+            <button id="startstopbtn" class="">Start</button>
             <button id="reset">Reset</button>
         </div>
         <div id="WorkandBreakContainer" class="WorkandBreak">
-            <div id="workTimeDisplay"class="incrementContainer">25:00</div>
-                <button id="workUptick" class="increments" value="workIncrease">+</button>
+                
                 <button id="workDowntick" class="increments" value="workDecrease">-</button>
-            <div id="breakTimeDisplay"class="incrementContainer">5:00</div>
+                <div id="workTimeDisplay"class="incrementContainer">25:00</div>
+                <button id="workUptick" class="increments" value="workIncrease">+</button>
+                <button id="workbtn" class="workandbreakstart">Set Work Time</button>
+
+                <button id="breakbtn" class="workandbreakstart">Set Break Time</button>
+                <button id="breakDowntick" class="increments" value="breakDecrease">-</button>  
+                <div id="breakTimeDisplay" class="incrementContainer">5:00</div>
                 <button id="breakUptick" class="increments"value="breakIncrease">+</button>
-                <button id="breakDowntick" class="increments" value="breakDecrease">-</button>
         </div>
     </div>
 </body>

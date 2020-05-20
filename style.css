@@ -1,25 +1,79 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    background-color: #EAE7DC;
+    color: #E85A4F; 
+}
+h1{
+    margin-top: 50px;
+    font-size: 40px;
 }
 #display{
 font-size: 200px;
 }
-#startstopbtn{
+#startstopbtn, #reset{
     width: 10%;
     height: 50px;
+    background-color: #E85A4F;
+    color: #EAE7DC;
+    border-radius: 10%;
+    text-align: center;
+    transition: 0.2s;
 }
 
+#startstopbtn:hover, #reset:hover, .increments:hover{
+    background-color: #EAE7DC;
+    color: #E85A4F;
+    border: 1px solid #E85A4F;
+}
+#displayMode{
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -35%);
+    color: #E98074;
+    font-size: 50px;
+    border: 1px solid #E98074;
+    width: 25%;
+}
 #WorkandBreakContainer{
     display:flex;
     justify-content: center;
-    height: 50px;
+    height: 75px;
+}
+.increments, .workandbreakstart{
+    border: 1px solid #8E8D8A;
+    width: 5%;
+    border-radius: 10%;
+    margin: 1px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.workandbreakstart{
+    font-size: 12px !important;
+}
+
+.workandbreakstart:hover{
+    background-color: #E85A4F;
+    color: #EAE7DC;
 }
 .increments{
-    border: 1px solid black;
-    width: 5%;
+    background-color: #E85A4F;
+    color: #EAE7DC;
+    border-radius: 10%;
+    text-align: center;
+    transition: 0.2s;
 }
+
 .incrementContainer{
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 20px;
+    border: 1px solid #E85A4F;
+    border-radius: 10%;
     width: 10%
+    
 }

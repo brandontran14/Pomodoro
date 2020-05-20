@@ -14,16 +14,26 @@ const workTimeDisplay = document.querySelector("#workTimeDisplay");
 const breakTimeDisplay = document.querySelector("#breakTimeDisplay");
 const pageTitle = document.querySelector("title");
 const resetbtn = document.querySelector("#reset");
+const workbtn = document.querySelector("#workbtn");
+const breakbtn = document.querySelector("#breakbtn");
 
 
 
 //this function updates the timer to change your session/break time
 function updateTime() {
-    currentTime--;
-    clockDisplay.textContent = convertToDisplayTime(currentTime);    
-    pageTitle.textContent = `Pomodoro Timer ${convertToDisplayTime(currentTime)} ${timerMode.toUpperCase()}`;
+    currentTime--; 
+    updateDisplay();
+    updateTitle();
     checkTime();
 } 
+
+function updateDisplay(){
+    clockDisplay.textContent = convertToDisplayTime(currentTime);   
+}
+
+function updateTitle(){
+    pageTitle.textContent = `Pomodoro Timer ${convertToDisplayTime(currentTime)} ${timerMode.toUpperCase()}`;
+}
 
 //converts display time into nice numbers
 function convertToDisplayTime(time){
@@ -105,12 +115,29 @@ function reset(){
     workTimeDisplay.textContent = convertToDisplayTime(currentTime);
     displayModeDiv.textContent = "work"
     startstopbtn.textContent = "Start"
-    clockDisplay.textContent = convertToDisplayTime(currentTime);    
-    pageTitle.textContent = `Pomodoro Timer ${convertToDisplayTime(currentTime)} ${timerMode.toUpperCase()}`;
+    updateDisplay();
+    updateTitle();
 }
+
+function switchtowork(){
+    reset();
+
+}
+
+function switchtobreak(){
+    reset();
+    timerMode = "break"
+    currentTime = breakTime;
+    breakTimeDisplay.textContent = convertToDisplayTime(currentTime);
+    displayModeDiv.textContent = "break"
+    updateDisplay();
+    updateTitle();
+}
+
 
 //event listeners
 startstopbtn.addEventListener("click",toggleTimer);
 WorkandBreakContainer.addEventListener("click", changeTimeValue);
 resetbtn.addEventListener("click", reset);
-
+workbtn.addEventListener("click",switchtowork);
+breakbtn.addEventListener("click",switchtobreak);
